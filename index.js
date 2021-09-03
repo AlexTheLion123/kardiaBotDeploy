@@ -549,13 +549,13 @@ function checkRateLimited(ctx){
     const long_term_uses = long_term_rateLimiter.limiters[ctx.from.id].tokensThisInterval
     
     //give warning to user (only for long term limit)
-    if(long_term_uses == (LONG_TERM_LIMIT-3)){
-        ctx.reply(`⚠️ *#Warning ${ctx.from.first_name}* ⚠️\nYou have been flagged for #excessive usage. You will be #muted for ${LONG_TERM_MUTE} seconds if you continue without pause.`, 
-        {
-            reply_to_message_id: ctx.message.message_id,
-            parse_mode: "markdown"
-        })
-    }
+    // if(long_term_uses == (LONG_TERM_LIMIT-3)){
+    //     ctx.reply(`⚠️ *#Warning ${ctx.from.first_name}* ⚠️\nYou have been flagged for #excessive usage. You will be #muted for ${LONG_TERM_MUTE} seconds if you continue without pause.`, 
+    //     {
+    //         reply_to_message_id: ctx.message.message_id,
+    //         parse_mode: "markdown"
+    //     })
+    // }
 
     if (short_term_uses == SHORT_TERM_LIMIT) {
         ctx.deleteMessage()
