@@ -153,6 +153,7 @@ fetch(apiurl)
                 return output(input_coin, ctx);
             } else if(input.length > 1 && !coinlist.includes(input_coin)){
                 const initial_char = input_coin.charAt(0); 
+                console.log(input_coin);
                 console.log(initial_char);
                 const suggestions = coinlist.filter(item => item.charAt(0) == initial_char);
                 console.log(suggestions);
@@ -228,6 +229,7 @@ function getUpperCaseCoinlist(coinlist){
 function transformInput(input) {
     const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
     if(temp_index >= 0){
+        console.log(coinlist[temp_index])
         return coinlist[temp_index];
     }
     return input;
