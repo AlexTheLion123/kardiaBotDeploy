@@ -51,7 +51,6 @@ Here is the breakdown of commands that I support:
 const HELP_MESSAGE = 
 `
 ${COMMAND_BREAKDOWN}
-
 To show the chart for a token, just find the token in the menu or send a message with the token name as a single word. Try it, type in 'kai'
 `
 
@@ -79,7 +78,6 @@ bot.on('new_chat_members', async ctx => {
     const WELCOME_MESSAGE = 
 `
 🚀 Welcome #${ctx.from.first_name} to ${ctx.chat.title}. I am the #KardiaInfo bot and my aim to keep you up to date with the latest information regarding Kardiachain.
-
 ${COMMAND_BREAKDOWN}
 `
     if(groupWhitelist.includes(ctx.chat.id)){
