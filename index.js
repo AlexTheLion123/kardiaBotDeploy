@@ -127,7 +127,7 @@ fetch(apiurl)
     .then(res => {
         res.push([{"text": "Back to Menu"}])
 
-        getLowerCaseCoinlist();
+        getLowerCaseCoinlist(coinlist);
         
         bot.hears("Tokens", async ctx => {
             return displayKeyboard(ctx, res, `*Click on a Token*`);
