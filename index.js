@@ -11,7 +11,7 @@ const apiurl = process.env.TOKEN_API;
 const apiLPurl = process.env.LP_API;
     
 const QuickChart = require(`quickchart-js`);
-const whitelist = [1783394599, 845055796, 441474956, 1894125099]; // for users to send without being deleted
+const whitelist = [1783394599, 845055796, 441474956]; // for users to send without being deleted
 const groupWhitelist = [-1001543285342, -414304361]; //1 - kardiainfo chat, 2 - bottest test
 let chartlink;
 const DELAY = 300000;
@@ -536,7 +536,6 @@ async function output(name, ctx){
 
 function checkRateLimited(ctx){
     if(whitelist.includes(ctx.from.id)){
-        console.log(ctx.from.id + " whitelisted")
         return false;
     }
     
