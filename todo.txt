@@ -1,0 +1,2 @@
+use individual apis
+don't hard code which are scientific notation

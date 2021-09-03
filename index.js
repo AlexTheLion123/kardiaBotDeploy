@@ -29,6 +29,8 @@ const mid_term_rateLimiter = new _telegrafRateLimiter.RateLimiter(MID_TERM_LIMIT
 const long_term_rateLimiter = new _telegrafRateLimiter.RateLimiter(LONG_TERM_LIMIT, LONG_TERM_MUTE*1000);
 //const rateLimiter = new RateLimiter(1,2000) // e.g. each user can only send 1 message per 2 seconds
 
+// let upperCaseExceptions = [];
+let upperCaseCoinlist = [];
 let topTenArray = [];
 let coinlist = [];
 let lpList = []; // Array of all lp names
@@ -107,9 +109,11 @@ fetch(apiurl)
         topTenArray = tokenData.slice(0,10);
         topTenSymbols = topTenArray.map(item => item.symbol); 
 
-
         coinlist = jsonData.tokens.map(item => item.symbol) // uses same reference as tokenData
-        
+        //getUpperCaseExceptions();
+        getUpperCaseCoinlist();
+
+
         //replace LTD
         let index = coinlist.indexOf("LTD Token");
         if (index !== -1) {
@@ -136,24 +140,15 @@ fetch(apiurl)
         })
 
         bot.hears(coinlistLowerCase, async (ctx) => {
-            if(ctx.message.text.toUpperCase() == "BOSSDOGE"){
-                return output("BossDoge", ctx);
-            } else {
-                return output(ctx.message.text.toUpperCase(), ctx);
-            }
+            return output(transformInput(ctx.message.text));
         })    
 
         bot.command("price", async ctx => {
             const input = ctx.message.text.split(" ");
             let input_coin = "";
+            
             if(input.length > 1){
-                if(input[1]=="bossdoge"){
-                    input_coin = "BossDoge";
-                } else {
-                    input_coin = input[1].toUpperCase();
-                }
-                
-
+                input_coin = transformInput(input[1]);
             } else {
                 return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
             }
@@ -215,6 +210,28 @@ async function showIFO(ctx){
             }
             
     })
+}
+
+// function getUpperCaseExceptions(coinlist){
+//     for(let i=0; i<coinlist.length; i++){
+//         if(coinlist[i].toUpperCase != coinlist[i]){
+//             upperCaseExceptions.push(coinlist[i].toUpperCase());
+//         }
+//     }
+// }
+
+function getUpperCaseCoinlist(coinlist){
+    for(let i=0; i<coinlist.length; i++){
+        upperCaseCoinlist.push(coinlist[i].toUpperCase);
+    }
+}
+
+function transformInput(input) {
+    const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase);
+    if(temp_index > 0){
+        return coinlist[temp_index];
+    }
+    return input;
 }
 
 async function mainMenu(ctx){
