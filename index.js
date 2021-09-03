@@ -226,7 +226,6 @@ function getUpperCaseCoinlist(coinlist){
 function transformInput(input) {
     const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
     if(temp_index >= 0){
-        console.log(coinlist[temp_index])
         return coinlist[temp_index];
     }
     return input;
@@ -327,7 +326,6 @@ function getHTMLTable(arr){
         }
         newArr.push(tempStr);
     }
-    //console.log(newArr);
     return newArr;
 }
 
