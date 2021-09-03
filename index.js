@@ -627,6 +627,12 @@ function numberWithCommas(x) {
 
 // //----------------------------------------------------trying to make chart look better below
 function getchart2(chartdata, coinname){
+    let chartCurrency = ""
+    if(coinname == 'KAI'){
+        chartCurrency = "USD";
+    } else {
+        chartCurrency = "KAI";
+    }
 
     const chart = new QuickChart();
 
@@ -671,7 +677,7 @@ function getchart2(chartdata, coinname){
             // }
             title: {
               display: true,
-              text: '24H Price Chart in KAI',
+              text: `24H Price Chart in ${chartCurrency}`,
             }
         },
         
