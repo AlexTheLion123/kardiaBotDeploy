@@ -215,7 +215,7 @@ async function showIFO(ctx){
 
 // function getUpperCaseExceptions(coinlist){
 //     for(let i=0; i<coinlist.length; i++){
-//         if(coinlist[i].toUpperCase != coinlist[i]){
+//         if(coinlist[i].toUpperCase() != coinlist[i]){
 //             upperCaseExceptions.push(coinlist[i].toUpperCase());
 //         }
 //     }
@@ -223,12 +223,12 @@ async function showIFO(ctx){
 
 function getUpperCaseCoinlist(coinlist){
     for(let i=0; i<coinlist.length; i++){
-        upperCaseCoinlist.push(coinlist[i].toUpperCase);
+        upperCaseCoinlist.push(coinlist[i].toUpperCase());
     }
 }
 
 function transformInput(input) {
-    const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase);
+    const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
     if(temp_index > 0){
         return coinlist[temp_index];
     }
