@@ -111,7 +111,7 @@ fetch(apiurl)
 
         coinlist = jsonData.tokens.map(item => item.symbol) // uses same reference as tokenData
         //getUpperCaseExceptions();
-        getUpperCaseCoinlist();
+        getUpperCaseCoinlist(coinlist);
 
 
         //replace LTD
