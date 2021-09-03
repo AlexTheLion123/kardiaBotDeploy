@@ -234,9 +234,7 @@ function getUpperCaseCoinlist(coinlist){
 
 function transformInput(input) {
     const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
-    console.log(coinlist[temp_index]);
-    console.log(coinlist);
-    if(temp_index > 0){
+    if(temp_index >= 0){
         return coinlist[temp_index];
     }
     return input;
