@@ -30,6 +30,7 @@ const long_term_rateLimiter = new _telegrafRateLimiter.RateLimiter(LONG_TERM_LIM
 //const rateLimiter = new RateLimiter(1,2000) // e.g. each user can only send 1 message per 2 seconds
 
 // let upperCaseExceptions = [];
+let lowerCaseCoinlist = [];
 let upperCaseCoinlist = [];
 let topTenArray = [];
 let coinlist = [];
@@ -125,11 +126,8 @@ fetch(apiurl)
     })
     .then(res => {
         res.push([{"text": "Back to Menu"}])
-        
-        let coinlistLowerCase = [];
-        for(i=0;i<coinlist.length; i++){ //also allow user to type in lower case
-            coinlistLowerCase.push(coinlist[i].toLowerCase());
-        }
+
+        getLowerCaseCoinlist();
         
         bot.hears("Tokens", async ctx => {
             return displayKeyboard(ctx, res, `*Click on a Token*`);
@@ -139,7 +137,7 @@ fetch(apiurl)
             return output(ctx.message.text, ctx);   
         })
 
-        bot.hears(coinlistLowerCase, async (ctx) => {
+        bot.hears(lowerCaseCoinlist, async (ctx) => {
             return output(transformInput(ctx.message.text), ctx);
         })    
 
@@ -149,7 +147,6 @@ fetch(apiurl)
             
             if(input.length > 1){
                 input_coin = transformInput(input[1]);
-                console.log(input_coin);
             } else {
                 return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
             }
@@ -198,6 +195,14 @@ fetch(apiurl)
         })
     })
 
+
+//start of functions
+function getLowerCaseCoinlist(coinlist){
+    for(i=0;i<coinlist.length; i++){ //also allow user to type in lower case
+        lowerCaseCoinlist.push(coinlist[i].toLowerCase());
+    }
+};
+
 async function showIFO(ctx){
     return ctx.reply("Follow the link to find out more about the IFO with KardiaInfo", 
         {
@@ -229,6 +234,8 @@ function getUpperCaseCoinlist(coinlist){
 
 function transformInput(input) {
     const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
+    console.log(coinlist[temp_index]);
+    console.log(coinlist);
     if(temp_index > 0){
         return coinlist[temp_index];
     }
@@ -448,7 +455,6 @@ async function output(name, ctx){
         return;
     }
     
-    
     let sender_id = ctx.from.id
     
     if(name=="LTD"){
@@ -492,7 +498,6 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
-
                 replyMessage = `Price USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*` 
 
                 usdVals = coindata[0].histData.slice(1,25);
