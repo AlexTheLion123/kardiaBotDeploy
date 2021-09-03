@@ -136,7 +136,7 @@ fetch(apiurl)
         })
 
         bot.hears(coinlistLowerCase, async (ctx) => {
-            if(ctx.message.text == "bossdoge"){
+            if(ctx.message.text.toUpperCase() == "BOSSDOGE"){
                 return output("BossDoge", ctx);
             } else {
                 return output(ctx.message.text.toUpperCase(), ctx);
