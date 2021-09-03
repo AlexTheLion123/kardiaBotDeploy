@@ -152,10 +152,11 @@ fetch(apiurl)
             if(input.length > 1 && coinlist.includes(input_coin)){ //types price and coin is valid
                 return output(input_coin, ctx);
             } else if(input.length > 1 && !coinlist.includes(input_coin)){
-                console.log("hello") 
                 const initial_char = input_coin.charAt(0); 
+                console.log(initial_char);
                 const suggestions = coinlist.filter(item => item.charAt(0) == initial_char);
-                console.log(input_coin);
+                console.log(suggestions);
+
                 //branch 1: types price command and coin but coin is not valid, but first letter matches
                 if(suggestions.length > 0){ 
                     let temp_str = "⚠️ Did you mean: ";
