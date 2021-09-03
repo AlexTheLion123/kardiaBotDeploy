@@ -534,6 +534,10 @@ async function output(name, ctx){
 }            
 
 function checkRateLimited(ctx){
+    if(whitelist.includes(ctx.from.id)){
+        return false;
+    }
+    
     const short_term_limited = short_term_rateLimiter.take(ctx.from.id);
     const short_term_uses = short_term_rateLimiter.limiters[ctx.from.id].tokensThisInterval
 
