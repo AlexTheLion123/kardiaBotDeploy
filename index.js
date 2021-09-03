@@ -140,7 +140,7 @@ fetch(apiurl)
         })
 
         bot.hears(coinlistLowerCase, async (ctx) => {
-            return output(transformInput(ctx.message.text));
+            return output(transformInput(ctx.message.text), ctx);
         })    
 
         bot.command("price", async ctx => {
