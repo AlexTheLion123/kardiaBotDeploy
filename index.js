@@ -149,6 +149,7 @@ fetch(apiurl)
             
             if(input.length > 1){
                 input_coin = transformInput(input[1]);
+                console.log(input_coin);
             } else {
                 return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
             }
