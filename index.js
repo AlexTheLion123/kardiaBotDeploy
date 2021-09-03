@@ -536,6 +536,7 @@ async function output(name, ctx){
 
 function checkRateLimited(ctx){
     if(whitelist.includes(ctx.from.id)){
+        console.log(ctx.from.id + " whitelisted")
         return false;
     }
     
