@@ -4,8 +4,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const PORT = process.env.PORT || 3000;
 const HEROKU_URL = process.env.HEROKU_URL; 
 
-require('dotenv').config();
-
 const axios = require(`axios`);
 const fetch = require('node-fetch');
 
