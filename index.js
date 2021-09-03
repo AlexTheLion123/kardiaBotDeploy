@@ -37,14 +37,20 @@ let lpList = []; // Array of all lp names
 let lpData = []; // Array of objects containing all the LP data (keyboard)
 let coinKeyboard = []; // array of objects for keyboard of coins
 let topTenSymbols = [];
-const HELP_MESSAGE = 
+const COMMAND_BREAKDOWN =
 `
 Here is the breakdown of commands that I support:
 /price symbol - get the price of the specified token. E.g. /price beco
 /list, /info - get a list of the top ten KRC tokens by tvl
 /help - a breakdown of all the bot commands
 /menu - show the main menu
-/now, /summary - show the price summary for the top ten KRC tokens 
+/now, /summary - show the price summary for the top ten KRC tokens
+/lps - show the available LP pairs on kaidex 
+`
+
+const HELP_MESSAGE = 
+`
+${COMMAND_BREAKDOWN}
 
 To show the chart for a token, just find the token in the menu or send a message with the token name as a single word. Try it, type in 'kai'
 `
@@ -74,10 +80,7 @@ bot.on('new_chat_members', async ctx => {
 `
 🚀 Welcome #${ctx.from.first_name} to ${ctx.chat.title}. I am the #KardiaInfo bot and my aim to keep you up to date with the latest information regarding Kardiachain.
 
-The list of commands I support are as follows:
-/price coin - e.g. /price beco
-/start - to display a button selection of all supported coins
-/list, /help, /info - to display a list of all supported coins
+${COMMAND_BREAKDOWN}
 `
     if(groupWhitelist.includes(ctx.chat.id)){
         return ctx.reply(WELCOME_MESSAGE, {parse_mode: 'markdown'})
