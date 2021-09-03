@@ -29,7 +29,6 @@ const mid_term_rateLimiter = new _telegrafRateLimiter.RateLimiter(MID_TERM_LIMIT
 const long_term_rateLimiter = new _telegrafRateLimiter.RateLimiter(LONG_TERM_LIMIT, LONG_TERM_MUTE*1000);
 //const rateLimiter = new RateLimiter(1,2000) // e.g. each user can only send 1 message per 2 seconds
 
-// let upperCaseExceptions = [];
 let lowerCaseCoinlist = [];
 let upperCaseCoinlist = [];
 let topTenArray = [];
@@ -111,7 +110,6 @@ fetch(apiurl)
         topTenSymbols = topTenArray.map(item => item.symbol); 
 
         coinlist = jsonData.tokens.map(item => item.symbol) // uses same reference as tokenData
-        //getUpperCaseExceptions();
         getUpperCaseCoinlist(coinlist);
 
 
@@ -147,16 +145,17 @@ fetch(apiurl)
             
             if(input.length > 1){
                 input_coin = transformInput(input[1]);
-            } else {
+            } else { // if only types '/price'
                 return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
             }
             
             if(input.length > 1 && coinlist.includes(input_coin)){ //types price and coin is valid
                 return output(input_coin, ctx);
-            } else if(input.length > 1 && !coinlist.includes(input_coin)){ 
+            } else if(input.length > 1 && !coinlist.includes(input_coin)){
+                console.log("hello") 
                 const initial_char = input_coin.charAt(0); 
                 const suggestions = coinlist.filter(item => item.charAt(0) == initial_char);
-
+                console.log(input_coin);
                 //branch 1: types price command and coin but coin is not valid, but first letter matches
                 if(suggestions.length > 0){ 
                     let temp_str = "⚠️ Did you mean: ";
@@ -218,13 +217,6 @@ async function showIFO(ctx){
     })
 }
 
-// function getUpperCaseExceptions(coinlist){
-//     for(let i=0; i<coinlist.length; i++){
-//         if(coinlist[i].toUpperCase() != coinlist[i]){
-//             upperCaseExceptions.push(coinlist[i].toUpperCase());
-//         }
-//     }
-// }
 
 function getUpperCaseCoinlist(coinlist){
     for(let i=0; i<coinlist.length; i++){
