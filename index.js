@@ -253,7 +253,7 @@ function transformInput(input) {
 }
 
 async function mainMenu(ctx){
-    return await ctx.reply(`Hello ${ctx.from.first_name}, I am the KardiaInfo bot, click on a button`, 
+    return await ctx.reply(`Hello, I am the KardiaInfo bot, click on a button`, 
         {   
             parse_mode: 'markdown',
             reply_to_message_id: ctx.message.message_id,
