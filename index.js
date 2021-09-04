@@ -156,7 +156,7 @@ fetch(apiurl)
             return output(transformInput(ctx.message.text), ctx);
         })    
 
-        bot.command("price", async ctx => {
+        bot.command(["price","p"], async ctx => {
             return getPriceCommandOutput(ctx);
         })
 
