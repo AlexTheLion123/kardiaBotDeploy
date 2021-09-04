@@ -78,6 +78,16 @@ bot.hears(["Help","help","HELP"], async ctx=> {
 //     return showIFO(ctx);
 // })
 
+bot.on('text', async ctx => {   
+    const input = ctx.message.text.split(" ");
+    if(input.length==1){
+        const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
+        if(temp_index >= 0){
+            return output(coinlist[temp_index], ctx);
+        }
+    }
+})
+
 bot.on('new_chat_members', async ctx => {
     const WELCOME_MESSAGE = 
 `
