@@ -66,13 +66,17 @@ bot.command("help", async ctx=> {
     return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id})
 })
 
-bot.command(["IFO","ifo"], async ctx => {
-    return showIFO(ctx);
+bot.hears(["Help","help","HELP"], async ctx=> {
+    return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id})
 })
 
-bot.hears(["IFO","ifo"], async ctx => {
-    return showIFO(ctx);
-})
+// bot.command(["IFO","ifo"], async ctx => {
+//     return showIFO(ctx);
+// })
+
+// bot.hears(["IFO","ifo"], async ctx => {
+//     return showIFO(ctx);
+// })
 
 bot.on('new_chat_members', async ctx => {
     const WELCOME_MESSAGE = 
@@ -141,33 +145,7 @@ fetch(apiurl)
         })    
 
         bot.command("price", async ctx => {
-            const input = ctx.message.text.split(" ");
-            let input_coin = "";
-            
-            if(input.length > 1){
-                input_coin = transformInput(input[1]);
-            } else { // if only types '/price'
-                return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
-            }
-            
-            if(input.length > 1 && coinlist.includes(input_coin)){ //types price and coin is valid
-                return output(input_coin, ctx);
-            } else if(input.length > 1 && !coinlist.includes(input_coin)){
-                const initial_char = input_coin.charAt(0).toUpperCase(); 
-                const suggestions = coinlist.filter(item => item.charAt(0) == initial_char);
-
-                //branch 1: types price command and coin but coin is not valid, but first letter matches
-                if(suggestions.length > 0){ 
-                    let temp_str = "⚠️ Did you mean: ";
-                    for(let i=0; i<suggestions.length; i++){
-                        temp_str = temp_str + `\n${suggestions[i]}`;
-                    }
-                    return ctx.reply(temp_str, {reply_to_message_id: ctx.message.message_id});
-                //branch 2: types price command and coin but coin is not valid, and first letter does not match.
-                } else {
-                    return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
-                }
-            }
+            return getPriceCommandOutput(ctx);
         })
 
         bot.command(["list", "info"], async ctx => {
@@ -196,6 +174,36 @@ fetch(apiurl)
 
 
 //start of functions
+async function getPriceCommandOutput(ctx){
+    const input = ctx.message.text.split(" ");
+    let input_coin = "";
+    
+    if(input.length > 1){
+        input_coin = transformInput(input[1]);
+    } else { // if only types '/price'
+        return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
+    }
+    
+    if(input.length > 1 && coinlist.includes(input_coin)){ //types price and coin is valid
+        return output(input_coin, ctx);
+    } else if(input.length > 1 && !coinlist.includes(input_coin)){
+        const initial_char = input_coin.charAt(0).toUpperCase(); 
+        const suggestions = coinlist.filter(item => item.charAt(0) == initial_char);
+
+        //branch 1: types price command and coin but coin is not valid, but first letter matches
+        if(suggestions.length > 0){ 
+            let temp_str = "⚠️ Did you mean: ";
+            for(let i=0; i<suggestions.length; i++){
+                temp_str = temp_str + `\n${suggestions[i]}`;
+            }
+            return ctx.reply(temp_str, {reply_to_message_id: ctx.message.message_id});
+        //branch 2: types price command and coin but coin is not valid, and first letter does not match.
+        } else {
+            return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", {reply_to_message_id: ctx.message.message_id})
+        }
+    }
+}
+
 function getLowerCaseCoinlist(coinlist){
     for(i=0;i<coinlist.length; i++){ //also allow user to type in lower case
         lowerCaseCoinlist.push(coinlist[i].toLowerCase());
@@ -242,7 +250,7 @@ async function mainMenu(ctx){
                     [{"text": "Tokens"}],
                     [{"text": "LP"}],
                     [{"text": "Summary"}],
-                    [{"text": "IFO"}]
+                    [{"text": "Help"}]
                 ],
                 resize_keyboard: true,
                 one_time_keyboard: true,
