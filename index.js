@@ -81,7 +81,7 @@ bot.hears(["Help","help","HELP"], async ctx=> {
 bot.on('text', async ctx => {   
     const input = ctx.message.text.split(" ");
     if(input.length==1){
-        const temp_index = upperCaseCoinlist.indexOf(input.toUpperCase());
+        const temp_index = upperCaseCoinlist.indexOf(input[0].toUpperCase());
         if(temp_index >= 0){
             return output(coinlist[temp_index], ctx);
         }
