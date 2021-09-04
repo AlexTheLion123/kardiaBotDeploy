@@ -87,7 +87,7 @@ bot.on('text', async (ctx, next) => {
         }
     }
 
-    next();
+    return next();
 })
 
 bot.on('new_chat_members', async ctx => {
