@@ -175,9 +175,7 @@ fetch(apiurl)
         onLpCommand();
     })
     .then(() => {
-        bot.command(["now","summary"], async ctx => {
-            return showTopTenPrices(ctx);
-        })
+        bot.command(["now","summary"], showTopTenPrices)
 
         bot.hears(["Summary", "summary", "now", "all", "prices", "Prices", "Now", "All"], async ctx => {
             return showTopTenPrices(ctx);
