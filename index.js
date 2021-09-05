@@ -647,11 +647,7 @@ function numberWithCommas(x) {
 // //----------------------------------------------------trying to make chart look better below
 function getchart2(chartdata, coinname){
     let chartCurrency = ""
-    if(coinname == 'KAI'){
-        chartCurrency = "USD";
-    } else {
-        chartCurrency = "KAI";
-    }
+    coinname == 'KAI' ? chartCurrency = "USD" : chartCurrency = "KAI";
 
     const chart = new QuickChart();
 
