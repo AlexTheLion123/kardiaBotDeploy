@@ -144,9 +144,7 @@ fetch(apiurl)
 
         getLowerCaseCoinlist(coinlist);
         
-        bot.hears("Tokens", async ctx => {
-            return displayKeyboard(ctx, res, `*Click on a Token*`);
-        })
+        bot.hears("Tokens", displayKeyboard(res, `*Click on a Token*`))
         
         bot.hears(coinlist, async (ctx) =>{   
             return output(ctx.message.text, ctx);   
@@ -156,9 +154,7 @@ fetch(apiurl)
             return output(transformInput(ctx.message.text), ctx);
         })    
 
-        bot.command(["price","p"], async ctx => {
-            return getPriceCommandOutput(ctx);
-        })
+        bot.command(["price","p"], getPriceCommandOutput)
 
         bot.command(["list", "info"], async ctx => {
             let strCoinList = "🏦 The #list of the top 10 coins by tvl is shown below. Use the */price* command to display the information for a specific coin.\nE.g. /price kai\n";
@@ -177,9 +173,7 @@ fetch(apiurl)
     .then(() => {
         bot.command(["now","summary"], showTopTenPrices)
 
-        bot.hears(["Summary", "summary", "now", "all", "prices", "Prices", "Now", "All"], async ctx => {
-            return showTopTenPrices(ctx);
-        })
+        bot.hears(["Summary", "summary", "now", "all", "prices", "Prices", "Now", "All"], showTopTenPrices)
     })
 
 
