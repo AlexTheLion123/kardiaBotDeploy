@@ -145,7 +145,7 @@ fetch(apiurl)
         getLowerCaseCoinlist(coinlist);
         
         bot.hears("Tokens", this.displayKeyboard.apply(this, res, `*Click on a Token*`))
-        
+        //
         bot.hears(coinlist, async (ctx) =>{   
             return output(ctx.message.text, ctx);   
         })
