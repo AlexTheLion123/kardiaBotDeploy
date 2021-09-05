@@ -578,12 +578,12 @@ function checkRateLimited(ctx){
     // }
 
     if (short_term_uses == SHORT_TERM_LIMIT) {
-        ctx.deleteMessage()
+        return ctx.deleteMessage()
         return true;
         
         if(ctx.chat.type != "supergroup"){
             //ctx.reply(`Please calm down ${ctx.from.first_name}!`)
-            ctx.deleteMessage()
+            return ctx.deleteMessage()
             return true
         }
         // ctx.reply(`${ctx.from.username} has been temporarily #muted for ${SHORT_TERM_MUTE} seconds`, 
@@ -598,12 +598,12 @@ function checkRateLimited(ctx){
     }
 
     if (mid_term_uses == MID_TERM_LIMIT) {
-        ctx.deleteMessage()
+        return ctx.deleteMessage()
         return true;
         
         if(ctx.chat.type != "supergroup"){
             //ctx.reply(`Please calm down ${ctx.from.first_name}!`)
-            ctx.deleteMessage()
+            return ctx.deleteMessage()
             return true
         }
         // ctx.reply(`${ctx.from.username} has been temporarily #muted for ${SHORT_TERM_MUTE} seconds`, 
@@ -618,11 +618,11 @@ function checkRateLimited(ctx){
     }
 
     if (long_term_uses == LONG_TERM_LIMIT) {
-        ctx.deleteMessage()
+        return ctx.deleteMessage()
         return true;
         
         if(ctx.chat.type != "supergroup"){
-            ctx.deleteMessage()
+            return ctx.deleteMessage()
             return true
         }
         ctx.reply(`${ctx.from.username} has been temporarily #muted for ${LONG_TERM_MUTE} seconds`, 
