@@ -540,7 +540,7 @@ async function output(name, ctx){
                     reply_markup: {
                         inline_keyboard:[
                             [
-                                {text: `Get more ${name} Info`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`}
+                                {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`}
                             ]
                         ]
                     }
