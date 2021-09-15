@@ -127,15 +127,15 @@ fetch(apiurl)
         topTenSymbols = topTenArray.map(item => item.symbol); 
 
         coinlist = jsonData.tokens.map(item => item.symbol) // uses same reference as tokenData
-        getUpperCaseCoinlist(coinlist);
-
-
+        
         //replace LTD
         let index = coinlist.indexOf("LTD Token");
         if (index !== -1) {
             coinlist[index] = "LTD";
         }
-
+        
+        getUpperCaseCoinlist(coinlist);
+        
         coinKeyboard = getKeyboardData(coinlist);
         return coinKeyboard;
     })
