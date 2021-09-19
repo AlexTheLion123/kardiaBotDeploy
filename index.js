@@ -687,9 +687,9 @@ function getchart2(chartdata, coinname){
                         },
                 }]
             },
-            // plugins: {
-            //     backgroundImageUrl: 'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569__340.jpg',
-            // }
+            plugins: {
+                backgroundImageUrl: 'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569__340.jpg',
+            },
             title: {
               display: true,
               text: `24H Price Chart in ${chartCurrency}`,
