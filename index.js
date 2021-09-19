@@ -542,7 +542,7 @@ async function output(name, ctx){
         })
         .then(async res=>{    
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
-            if(chat && web) {
+            if(chatLink && website) {
                 return await ctx.replyWithPhoto(res, 
                     {   
                         reply_to_message_id: ctx.message.message_id,
@@ -557,7 +557,7 @@ async function output(name, ctx){
                         }
                     })
             }
-            if(!chat && website){
+            if(!chatLink && website){
                 return await ctx.replyWithPhoto(res, 
                     {   
                         reply_to_message_id: ctx.message.message_id,
@@ -572,7 +572,7 @@ async function output(name, ctx){
                         }
                     })
             } 
-            if(chat && !web) {
+            if(chatLink && !website) {
                 return await ctx.replyWithPhoto(res, 
                     {   
                         reply_to_message_id: ctx.message.message_id,
@@ -587,7 +587,7 @@ async function output(name, ctx){
                         }
                     })
             }
-            if(!chat && !web) {
+            if(!chatLink && !website) {
                 return await ctx.replyWithPhoto(res, 
                     {   
                         reply_to_message_id: ctx.message.message_id,
