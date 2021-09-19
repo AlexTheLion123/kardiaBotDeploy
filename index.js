@@ -765,11 +765,11 @@ function getchart2(chartdata, coinname){
 }
 // //-----------------------------------------------------------------------------------above
 
-// bot.launch({
-//     webhook: {
-//         domain: HEROKU_URL,
-//         port: PORT
-//     }
-// })
+bot.launch({
+    webhook: {
+        domain: HEROKU_URL,
+        port: PORT
+    }
+})
 
-bot.launch()
+// bot.launch()
