@@ -475,7 +475,7 @@ async function output(name, ctx){
             kaidata = res.tokens.filter(item => item.symbol=='KAI');   
             kaiVals = kaidata[0].histData.slice(1,25);
             kaiVals.reverse(); //data is backwards
-            
+
 
             if(name != `KAI`){
                 coindata = res.tokens.filter(item => item.symbol==name);
@@ -490,6 +490,7 @@ async function output(name, ctx){
                     pricekai = Math.round(priceusd/kaiprice * 10000)/10000;
                 }
                 
+                let fullname = coindata[0].name;
                 dayChange = Math.round(coindata[0].dayChange * 10000)/10000;
                 tvl = Math.round(coindata[0].tvl);
                 mcap = Math.round(coindata[0].mcap);
@@ -501,7 +502,7 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
-                replyMessage = `Price USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai` 
+                replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -522,8 +523,9 @@ async function output(name, ctx){
                 tvl = numberWithCommas(Math.round(kaidata[0].tvl));
                 mcap = numberWithCommas(Math.round(kaidata[0].mcap));
                 supply = numberWithCommas(Math.round(kaidata[0].supply))
+                let fullname = kaidata[0].name;
                 
-                replyMessage = `\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai`  
+                replyMessage = `Name: *${fullname}*\n\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
