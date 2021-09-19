@@ -18,6 +18,7 @@ const DELAY = 300000;
 let replyMessage;
 let chatLink;
 let website;
+let contract;
 
 const _telegrafRateLimiter = require("@riddea/telegraf-rate-limiter");
 SHORT_TERM_LIMIT = 2; // 2 charts per 10 seconds
@@ -493,7 +494,7 @@ async function output(name, ctx){
                 }
                 
                 let fullname = coindata[0].name;
-                let contract = coindata[0].contract;
+                contract = coindata[0].id;
                 website = coindata[0].website;
                 chatLink = coindata[0].chat;
                 dayChange = Math.round(coindata[0].dayChange * 10000)/10000;
@@ -508,7 +509,7 @@ async function output(name, ctx){
                 mcap = numberWithCommas(mcap);
                 
                 
-                replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}\nContract: \`${contract}\`` 
+                replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -532,9 +533,9 @@ async function output(name, ctx){
                 let fullname = kaidata[0].name;
                 chatLink = kaidata[0].chat;
                 website = kaidata[0].website;
-                let contract = kaidata[0].contract;
+                contract = kaidata[0].id;
                 
-                replyMessage = `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}\nContract: \`${contract}\``  
+                replyMessage = `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
@@ -553,7 +554,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Website`, url: website}, {text: 'Chat', url: chatLink}
+                                    {text: `Website`, url: website}, {text: 'Chat', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         }
@@ -568,7 +569,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Website`, url: website}
+                                    {text: `Website`, url: website}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
@@ -583,7 +584,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: 'Chat', url: chatLink}
+                                    {text: 'Chat', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         }
@@ -594,7 +595,14 @@ async function output(name, ctx){
                     {   
                         reply_to_message_id: ctx.message.message_id,
                         caption: replyMessage,
-                        parse_mode: "markdown"
+                        parse_mode: "markdown",
+                        reply_markup: {
+                            inline_keyboard:[
+                                [
+                                    {text: 'Contract', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
+                                ]
+                            ]
+                        }
                     })
             }
             
