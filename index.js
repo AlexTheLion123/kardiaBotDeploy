@@ -16,6 +16,8 @@ const groupWhitelist = [-1001543285342, -414304361]; //1 - kardiainfo chat, 2 - 
 let chartlink;
 const DELAY = 300000;
 let replyMessage;
+let chatLink;
+let website;
 
 const _telegrafRateLimiter = require("@riddea/telegraf-rate-limiter");
 SHORT_TERM_LIMIT = 2; // 2 charts per 10 seconds
@@ -491,6 +493,8 @@ async function output(name, ctx){
                 }
                 
                 let fullname = coindata[0].name;
+                website = coindata[0].website;
+                chatLink = coindata[0].chat;
                 dayChange = Math.round(coindata[0].dayChange * 10000)/10000;
                 tvl = Math.round(coindata[0].tvl);
                 mcap = Math.round(coindata[0].mcap);
@@ -524,8 +528,10 @@ async function output(name, ctx){
                 mcap = numberWithCommas(Math.round(kaidata[0].mcap));
                 supply = numberWithCommas(Math.round(kaidata[0].supply))
                 let fullname = kaidata[0].name;
+                chatLink = kaidata[0].chat;
+                website = kaidata[0].website;
                 
-                replyMessage = `Name: *${fullname}*\n\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai`  
+                replyMessage = `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
@@ -534,6 +540,7 @@ async function output(name, ctx){
             return chartlink;
         })
         .then(async res=>{    
+            // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
             return await ctx.replyWithPhoto(res, 
                 {   
                     reply_to_message_id: ctx.message.message_id,
@@ -542,7 +549,7 @@ async function output(name, ctx){
                     reply_markup: {
                         inline_keyboard:[
                             [
-                                {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`}, {text: 'Chat', url: 'https://t.me/kardiainfo'}
+                                {text: `Learn more about ${name}`, url: website}, {text: 'Chat', url: chatLink}
                             ]
                         ]
                     }
