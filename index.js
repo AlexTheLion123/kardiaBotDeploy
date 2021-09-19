@@ -566,7 +566,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`
+                                    {text: `Learn more about \${name}`, url: `kardiainfo.com/tokens/\${name.replace(/\s+/g, '_')`}
                                 ]
                             ]
                         }
@@ -755,9 +755,11 @@ function getchart2(chartdata, coinname){
 }
 // //-----------------------------------------------------------------------------------above
 
-bot.launch({
-    webhook: {
-        domain: HEROKU_URL,
-        port: PORT
-    }
-})
+// bot.launch({
+//     webhook: {
+//         domain: HEROKU_URL,
+//         port: PORT
+//     }
+// })
+
+bot.launch()
