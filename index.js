@@ -542,21 +542,7 @@ async function output(name, ctx){
         })
         .then(async res=>{    
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
-            if(chat && website){
-                return await ctx.replyWithPhoto(res, 
-                    {   
-                        reply_to_message_id: ctx.message.message_id,
-                        caption: replyMessage,
-                        parse_mode: "markdown",
-                        reply_markup: {
-                            inline_keyboard:[
-                                [
-                                    {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`, {text: 'Chat', url: 'https://t.me/kardiainfo'}
-                                ]
-                            ]
-                        }
-                    })
-            } else {
+            if(chat && web) {
                 return await ctx.replyWithPhoto(res, 
                     {   
                         reply_to_message_id: ctx.message.message_id,
@@ -569,6 +555,44 @@ async function output(name, ctx){
                                 ]
                             ]
                         }
+                    })
+            }
+            if(!chat && website){
+                return await ctx.replyWithPhoto(res, 
+                    {   
+                        reply_to_message_id: ctx.message.message_id,
+                        caption: replyMessage,
+                        parse_mode: "markdown",
+                        reply_markup: {
+                            inline_keyboard:[
+                                [
+                                    {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`
+                                ]
+                            ]
+                        }
+                    })
+            } 
+            if(chat && !web) {
+                return await ctx.replyWithPhoto(res, 
+                    {   
+                        reply_to_message_id: ctx.message.message_id,
+                        caption: replyMessage,
+                        parse_mode: "markdown",
+                        reply_markup: {
+                            inline_keyboard:[
+                                [
+                                    {text: 'Chat', url: chatLink}
+                                ]
+                            ]
+                        }
+                    })
+            }
+            if(!chat && !web) {
+                return await ctx.replyWithPhoto(res, 
+                    {   
+                        reply_to_message_id: ctx.message.message_id,
+                        caption: replyMessage,
+                        parse_mode: "markdown"
                     })
             }
             
