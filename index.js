@@ -554,7 +554,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Website`, url: website}, {text: 'Chat', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
+                                    {text: `Website`, url: website}, {text: 'Chat', url: chatLink}, {text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         }
@@ -569,7 +569,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Website`, url: website}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
+                                    {text: `Website`, url: website}, {text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
@@ -584,7 +584,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: 'Chat', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
+                                    {text: 'Chat', url: chatLink}, {text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         }
@@ -599,7 +599,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: 'Contract', url: chatLink}, {text: 'contract', url: `explorer.kardiachain.io/token/${contract}`}
+                                    {text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}`}
                                 ]
                             ]
                         }
