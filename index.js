@@ -501,7 +501,7 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
-                replyMessage = `Price USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*` 
+                replyMessage = `Price USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -523,7 +523,7 @@ async function output(name, ctx){
                 mcap = numberWithCommas(Math.round(kaidata[0].mcap));
                 supply = numberWithCommas(Math.round(kaidata[0].supply))
                 
-                replyMessage = `\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*`  
+                replyMessage = `\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/kai`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
