@@ -506,6 +506,7 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
+                
                 replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
 
                 usdVals = coindata[0].histData.slice(1,25);
@@ -541,19 +542,36 @@ async function output(name, ctx){
         })
         .then(async res=>{    
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
-            return await ctx.replyWithPhoto(res, 
-                {   
-                    reply_to_message_id: ctx.message.message_id,
-                    caption: replyMessage,
-                    parse_mode: "markdown",
-                    reply_markup: {
-                        inline_keyboard:[
-                            [
-                                {text: `Learn more about ${name}`, url: website}, {text: 'Chat', url: chatLink}
+            if(chat && website){
+                return await ctx.replyWithPhoto(res, 
+                    {   
+                        reply_to_message_id: ctx.message.message_id,
+                        caption: replyMessage,
+                        parse_mode: "markdown",
+                        reply_markup: {
+                            inline_keyboard:[
+                                [
+                                    {text: `Learn more about ${name}`, url: `kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`, {text: 'Chat', url: 'https://t.me/kardiainfo'}
+                                ]
                             ]
-                        ]
-                    }
-                })
+                        }
+                    })
+            } else {
+                return await ctx.replyWithPhoto(res, 
+                    {   
+                        reply_to_message_id: ctx.message.message_id,
+                        caption: replyMessage,
+                        parse_mode: "markdown",
+                        reply_markup: {
+                            inline_keyboard:[
+                                [
+                                    {text: `Learn more about ${name}`, url: ""}, {text: 'Chat', url: chatLink}
+                                ]
+                            ]
+                        }
+                    })
+            }
+            
         })//end of fetch .then
 }            
 
