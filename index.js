@@ -493,6 +493,7 @@ async function output(name, ctx){
                 }
                 
                 let fullname = coindata[0].name;
+                let contract = coindata[0].contract;
                 website = coindata[0].website;
                 chatLink = coindata[0].chat;
                 dayChange = Math.round(coindata[0].dayChange * 10000)/10000;
@@ -507,7 +508,7 @@ async function output(name, ctx){
                 mcap = numberWithCommas(mcap);
                 
                 
-                replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
+                replyMessage = `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}\nContract: \`${contract}\`` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -531,8 +532,9 @@ async function output(name, ctx){
                 let fullname = kaidata[0].name;
                 chatLink = kaidata[0].chat;
                 website = kaidata[0].website;
+                let contract = kaidata[0].contract;
                 
-                replyMessage = `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
+                replyMessage = `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}\nContract: \`${contract}\``  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
@@ -551,7 +553,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Learn more about ${name}`, url: website}, {text: 'Chat', url: chatLink}
+                                    {text: `Website`, url: website}, {text: 'Chat', url: chatLink}
                                 ]
                             ]
                         }
@@ -566,7 +568,7 @@ async function output(name, ctx){
                         reply_markup: {
                             inline_keyboard:[
                                 [
-                                    {text: `Learn more about ${name}`, url: website}
+                                    {text: `Website`, url: website}
                                 ]
                             ]
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
