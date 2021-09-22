@@ -318,7 +318,7 @@ async function showTopTenPrices(ctx){
                     reply_markup: {
                         inline_keyboard:[
                             [
-                                {text: 'Get more Token Info', url: 'http://kardiainfo.com/tokens'}, {text: 'Chat', url: 'https://t.me/kardiainfo'}
+                                {text: 'More...', url: 'http://kardiainfo.com/tokens'}, {text: 'Chat', url: 'https://t.me/kardiainfo'}
                             ]
                         ]
                     }
