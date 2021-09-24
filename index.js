@@ -138,6 +138,8 @@ fetch(apiurl)
         if (index !== -1) {
             coinlist[index] = "LTD";
         }
+        coinlist.push("kusdt")
+        coinlist.push("kephi")
         
         getUpperCaseCoinlist(coinlist);
         
@@ -471,6 +473,7 @@ async function output(name, ctx){
     if(name=="KEPHI"){
         name = "KPHI"
     }
+    if(name=="KUSDT") name="KUSD-T"
     
     await fetch(apiurl)
         .then((res) => {
