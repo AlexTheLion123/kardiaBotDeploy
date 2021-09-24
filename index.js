@@ -151,7 +151,7 @@ fetch(apiurl)
 
         getLowerCaseCoinlist(coinlist);
         
-        bot.hears("Tokens", async ctx => {
+        bot.hears(["Tokens","tokens"], async ctx => {
             return displayKeyboard(ctx, res, `*Click on a Token*`);
         })
         
@@ -470,10 +470,10 @@ async function output(name, ctx){
     if(name=="LTD"){
         name = "LTD Token"
     }
-    if(name=="KEPHI"){
+    if(name=="KEPHI"||name=="kephi"||name=="Kephi"){
         name = "KPHI"
     }
-    if(name=="KUSDT") name="KUSD-T"
+    if(name=="KUSDT"||name=="kusdt"||name=="Kusdt") name="KUSD-T"
     
     await fetch(apiurl)
         .then((res) => {
@@ -484,9 +484,7 @@ async function output(name, ctx){
             kaiVals = kaidata[0].histData.slice(1,25);
             kaiVals.reverse(); //data is backwards
 
-            console.log(name);
             if(name != `KAI`){
-                console.log(name)
                 coindata = res.tokens.filter(item => item.symbol==name);
                 
                 kaiprice = kaidata[0].price;
