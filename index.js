@@ -1,3 +1,5 @@
+// require('dotenv').config();
+
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -479,8 +481,9 @@ async function output(name, ctx){
             kaiVals = kaidata[0].histData.slice(1,25);
             kaiVals.reverse(); //data is backwards
 
-
+            console.log(name);
             if(name != `KAI`){
+                console.log(name)
                 coindata = res.tokens.filter(item => item.symbol==name);
                 
                 kaiprice = kaidata[0].price;
@@ -752,8 +755,8 @@ function getchart2(chartdata, coinname){
             //     backgroundImageUrl: 'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569__340.jpg',
             // }
             title: {
-              display: true,
-              text: `24H Price Chart in ${chartCurrency}`,
+                display: true,
+                text: `24H Price Chart in ${chartCurrency}`,
             }
         },
         
