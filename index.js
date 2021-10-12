@@ -1,4 +1,5 @@
 // require('dotenv').config();
+const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -42,7 +43,7 @@ let lpList = []; // Array of all lp names
 let lpData = []; // Array of objects containing all the LP data (keyboard)
 let coinKeyboard = []; // array of objects for keyboard of coins
 let topTenSymbols = [];
-const COMMAND_BREAKDOWN =
+const COMMAND_BREAKDOWN = airdropMessage +
 `
 Here is the breakdown of commands that I support:
 /price symbol - get the price of the specified token. E.g. /price beco
@@ -53,7 +54,7 @@ Here is the breakdown of commands that I support:
 /lps - show the available LP pairs on kaidex 
 `
 
-const HELP_MESSAGE = 
+const HELP_MESSAGE = airdropMessage +
 `
 ${COMMAND_BREAKDOWN}
 To show the chart for a token, just find the token in the menu or send a message with the token name as a single word. Try it, type in 'kai'
@@ -68,11 +69,11 @@ bot.hears("Back to Menu", async ctx => {
 })
 
 bot.command("help", async ctx=> {
-    return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id})
+    return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id, parse_mode: "markdown"})
 })
 
 bot.hears(["Help","help","HELP"], async ctx=> {
-    return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id})
+    return ctx.reply(HELP_MESSAGE, {reply_to_message_id: ctx.message.message_id, parse_mode: "markdown"})
 })
 
 // bot.command(["IFO","ifo"], async ctx => {
@@ -166,7 +167,7 @@ fetch(apiurl)
         bot.command(["price","p"], getPriceCommandOutput)
 
         bot.command(["list", "info"], async ctx => {
-            let strCoinList = "🏦 The #list of the top 10 coins by tvl is shown below. Use the */price* command to display the information for a specific coin.\nE.g. /price kai\n";
+            let strCoinList = airdropMessage + "🏦 The #list of the top 10 coins by tvl is shown below. Use the */price* command to display the information for a specific coin.\nE.g. /price kai\n";
             for(let i=0; i<topTenSymbols.length; i++){
                 strCoinList = strCoinList + `\n${topTenSymbols[i]}`
             }
@@ -254,7 +255,7 @@ function transformInput(input) {
 }
 
 async function mainMenu(ctx){
-    return await ctx.reply(`Hello, I am the KardiaInfo bot, click on a button`, 
+    return await ctx.reply(airdropMessage + `Hello, I am the KardiaInfo bot, click on a button`, 
         {   
             parse_mode: 'markdown',
             reply_to_message_id: ctx.message.message_id,
@@ -404,7 +405,7 @@ async function onLpCommand(){
                 const lptvl = numberWithCommas(Math.round(lpData[lpIndex].tvl));
                 const lpSupply = numberWithCommas(Math.round(lpData[lpIndex].supply * 100)/100)
                 let lpReplyMessage = 
-                `Price: *$${lpPrice}* \nTVL: *$${lptvl}* \nSupply: *${lpSupply}*`;
+                airdropMessage + `Price: *$${lpPrice}* \nTVL: *$${lptvl}* \nSupply: *${lpSupply}*`;
                 
                 return ctx.reply(lpReplyMessage, 
                     {
@@ -484,7 +485,6 @@ async function output(name, ctx){
             kaiVals = kaidata[0].histData.slice(1,25);
             kaiVals.reverse(); //data is backwards
 
-            const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
             if(name != `KAI`){
                 coindata = res.tokens.filter(item => item.symbol==name);
                 
