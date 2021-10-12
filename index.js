@@ -484,7 +484,7 @@ async function output(name, ctx){
             kaiVals = kaidata[0].histData.slice(1,25);
             kaiVals.reverse(); //data is backwards
 
-            const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 Airdrop token (https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n"
+            const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n"
             if(name != `KAI`){
                 coindata = res.tokens.filter(item => item.symbol==name);
                 
@@ -513,7 +513,7 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
-                replyMessage = `${airdropMessage} Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
+                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -539,7 +539,7 @@ async function output(name, ctx){
                 website = kaidata[0].website;
                 contract = kaidata[0].id;
                 
-                replyMessage = `${airdropMessage} Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
+                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
