@@ -506,7 +506,7 @@ async function output(name, ctx){
                 tvl = Math.round(coindata[0].tvl);
                 mcap = Math.round(coindata[0].mcap);
                 supply = numberWithCommas(Math.round(coindata[0].supply))
-                const vol24h = numberWithCommas(Math.round(coindata[0].Vol24h, 2))
+                const vol24h = numberWithCommas(Math.round(coindata[0].Vol24h))
                 
                 //add commas
                 priceusd = numberWithCommas(priceusd);
@@ -539,7 +539,7 @@ async function output(name, ctx){
                 chatLink = kaidata[0].chat;
                 website = kaidata[0].website;
                 contract = kaidata[0].id;
-                const vol24h = numberWithCommas(Math.round(kaidata[0].Vol24h, 2))
+                const vol24h = numberWithCommas(Math.round(kaidata[0].Vol24h))
 
                 
                 replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nVolume 24h: *$${vol24h}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
