@@ -506,6 +506,7 @@ async function output(name, ctx){
                 tvl = Math.round(coindata[0].tvl);
                 mcap = Math.round(coindata[0].mcap);
                 supply = numberWithCommas(Math.round(coindata[0].supply))
+                const vol24h = numberWithCommas(Math.round(coindata[0].Vol24h))
                 
                 //add commas
                 priceusd = numberWithCommas(priceusd);
@@ -513,7 +514,7 @@ async function output(name, ctx){
                 tvl = numberWithCommas(tvl);
                 mcap = numberWithCommas(mcap);
                 
-                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
+                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *\$${priceusd}*\nDaily Change: *${dayChange}%*\nPrice KAI: *${pricekai} KAI*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nVolume 24h: *$${vol24h}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}` 
 
                 usdVals = coindata[0].histData.slice(1,25);
                 usdVals.reverse();
@@ -538,8 +539,10 @@ async function output(name, ctx){
                 chatLink = kaidata[0].chat;
                 website = kaidata[0].website;
                 contract = kaidata[0].id;
+                const vol24h = numberWithCommas(Math.round(kaidata[0].Vol24h))
+
                 
-                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
+                replyMessage = airdropMessage + `Name: *${fullname}*\nPrice USD: *$${kaiprice}*\nDaily Change: *${dayChange}%*\nTotal Supply: *${supply}*\nMarket Cap: *$${mcap}*\nTVL: *$${tvl}*\nVolume 24h: *$${vol24h}*\nChart: kardiainfo.com/tokens/${name.replace(/\s+/g, '_')}`  
 
                 chartlink = getchart2(kaiVals, name);
                 //return(message_id);
