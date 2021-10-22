@@ -139,8 +139,6 @@ fetch(apiurl)
         if (index !== -1) {
             coinlist[index] = "LTD";
         }
-        coinlist.push("kusdt")
-        coinlist.push("kephi")
         
         getUpperCaseCoinlist(coinlist);
         
@@ -163,6 +161,14 @@ fetch(apiurl)
         bot.hears(lowerCaseCoinlist, async (ctx) => {
             return output(transformInput(ctx.message.text), ctx);
         })    
+
+        bot.hears(["kephi, Kephi"], async ctx => {
+            return output("KPHI", ctx)
+        })
+
+        bot.hears(["kusdt, Kusdt"], async ctx => {
+            return output("k-usdt", ctx)
+        })
 
         bot.command(["price","p"], getPriceCommandOutput)
 
