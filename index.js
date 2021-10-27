@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 // const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
 const airdropMessage = "Info Token (INFO) ICO is comming soon - kardiainfo.com/ico make sure to not miss out on Chainlink of KAI!\n\n"
 
@@ -18,7 +18,7 @@ const QuickChart = require(`quickchart-js`);
 const whitelist = [1783394599, 845055796, 441474956]; // for users to send without being deleted
 const groupWhitelist = [-1001543285342, -414304361]; //1 - kardiainfo chat, 2 - bottest test
 let chartlink;
-const DELAY = 300000;
+const DELETE_DELAY = 1000;
 let replyMessage;
 let chatLink;
 let website;
@@ -278,6 +278,7 @@ async function mainMenu(ctx) {
                 selective: true
             }
         })
+        .then(res => myDelete(ctx, res))
 }
 
 async function showTopTenPrices(ctx) {
@@ -777,13 +778,22 @@ function getchart2(chartdata, coinname) {
     url = chart.getUrl();
     return (url);
 }
+
+function myDelete(ctx, res) {
+    const userMsgId = ctx.update.message.message_id
+    const botMsgId = res.message_id
+
+    setTimeout(() => ctx.deleteMessage(userMsgId), DELETE_DELAY)
+    setTimeout(() => ctx.deleteMessage(botMsgId), DELETE_DELAY)
+}
+
 // //-----------------------------------------------------------------------------------above
 
-bot.launch({
-    webhook: {
-        domain: HEROKU_URL,
-        port: PORT
-    }
-})
+// bot.launch({
+//     webhook: {
+//         domain: HEROKU_URL,
+//         port: PORT
+//     }
+// })
 
-// bot.launch()
+bot.launch()
