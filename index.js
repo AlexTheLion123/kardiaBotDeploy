@@ -71,10 +71,14 @@ bot.hears("Back to Menu", async ctx => {
 
 bot.command("help", async ctx => {
     return ctx.reply(HELP_MESSAGE, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
+        .then(res => myDelete(ctx, res))
+
 })
 
 bot.hears(["Help", "help", "HELP"], async ctx => {
     return ctx.reply(HELP_MESSAGE, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
+        .then(res => myDelete(ctx, res))
+
 })
 
 // bot.command(["IFO","ifo"], async ctx => {
@@ -105,6 +109,8 @@ ${COMMAND_BREAKDOWN}
 `
     if (groupWhitelist.includes(ctx.chat.id)) {
         return ctx.reply(WELCOME_MESSAGE, { parse_mode: 'markdown' })
+            .then(res => myDelete(ctx, res))
+
     }
 })
 
@@ -179,6 +185,8 @@ fetch(apiurl)
                 strCoinList = strCoinList + `\n${topTenSymbols[i]}`
             }
             return ctx.reply(strCoinList, { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' })
+                .then(res => myDelete(ctx, res))
+
         })
 
 
@@ -203,6 +211,8 @@ async function getPriceCommandOutput(ctx) {
         input_coin = transformInput(input[1]);
     } else { // if only types '/price'
         return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", { reply_to_message_id: ctx.message.message_id })
+            .then(res => myDelete(ctx, res))
+
     }
 
     if (input.length > 1 && coinlist.includes(input_coin)) { //types price and coin is valid
@@ -217,10 +227,14 @@ async function getPriceCommandOutput(ctx) {
             for (let i = 0; i < suggestions.length; i++) {
                 temp_str = temp_str + `\n${suggestions[i]}`;
             }
-            return ctx.reply(temp_str, { reply_to_message_id: ctx.message.message_id });
+            return ctx.reply(temp_str, { reply_to_message_id: ctx.message.message_id })
+                .then(res => myDelete(ctx, res))
+
             //branch 2: types price command and coin but coin is not valid, and first letter does not match.
         } else {
             return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", { reply_to_message_id: ctx.message.message_id })
+                .then(res => myDelete(ctx, res))
+
         }
     }
 }
@@ -244,6 +258,8 @@ async function showIFO(ctx) {
             }
 
         })
+        .then(res => myDelete(ctx, res))
+
 }
 
 
@@ -335,7 +351,9 @@ async function showTopTenPrices(ctx) {
                             ]
                         ]
                     }
-                });
+                })
+                .then(res => myDelete(ctx, res))
+
 
         })
 }
@@ -426,7 +444,9 @@ async function onLpCommand() {
                                 ]
                             ]
                         }
-                    });
+                    })
+                    .then(res => myDelete(ctx, res))
+
             })
         }) //end of last then
 } // end of lp function
@@ -465,6 +485,8 @@ async function displayKeyboard(ctx, keyboardData, message) {
                 selective: true
             }
         })
+        .then(res => myDelete(ctx, res))
+
 
 }
 
@@ -530,6 +552,8 @@ async function output(name, ctx) {
                 //if new coin, chart cannot be plotted
                 if (usdVals.length < 24) {
                     ctx.reply(`Not enough historical data to construct a chart for *${name}*. Coin hasn't been live for 24 hours yet.\n\n${replyMessage}`, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
+                        .then(res => myDelete(ctx, res))
+
                     return
                 }
 
@@ -574,6 +598,8 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .then(res => myDelete(ctx, res))
+
             }
             if (!chatLink && website) {
                 return await ctx.replyWithPhoto(res,
@@ -589,6 +615,8 @@ async function output(name, ctx) {
                             ]
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
                     })
+                    .then(res => myDelete(ctx, res))
+
             }
             if (chatLink && !website) {
                 return await ctx.replyWithPhoto(res,
@@ -604,6 +632,8 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .then(res => myDelete(ctx, res))
+
             }
             if (!chatLink && !website) {
                 return await ctx.replyWithPhoto(res,
@@ -619,6 +649,8 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .then(res => myDelete(ctx, res))
+
             }
 
         })//end of fetch .then
