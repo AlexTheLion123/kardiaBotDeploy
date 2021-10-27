@@ -1,6 +1,6 @@
 // require('dotenv').config();
 // const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
-const airdropMessage = "Info Token (INFO) ICO is comming soon - kardiainfo.com/ico make sure to not miss out on Chainlink of KAI!"
+const airdropMessage = "Info Token (INFO) ICO is comming soon - kardiainfo.com/ico make sure to not miss out on Chainlink of KAI!\n\n"
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
