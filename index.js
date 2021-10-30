@@ -1,6 +1,6 @@
 require('dotenv').config();
 // const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
-const airdropMessage = "Info Token (INFO) ICO is comming soon - kardiainfo.com/ico make sure to not miss out on Chainlink of KAI!\n\n"
+const airdropMessage = "Info Token (INFO) ICO is coming soon - kardiainfo.com/ico make sure to not miss out on Chainlink of KAI!\n\n"
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -18,7 +18,7 @@ const QuickChart = require(`quickchart-js`);
 const whitelist = [1783394599, 845055796, 441474956]; // for users to send without being deleted
 const groupWhitelist = [-1001543285342, -414304361]; //1 - kardiainfo chat, 2 - bottest test
 let chartlink;
-const DELETE_DELAY = 1000;
+const DELETE_DELAY = 30000;
 let replyMessage;
 let chatLink;
 let website;
@@ -72,12 +72,14 @@ bot.hears("Back to Menu", async ctx => {
 bot.command("help", async ctx => {
     return ctx.reply(HELP_MESSAGE, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
         .then(res => myDelete(ctx, res))
+        
 
 })
 
 bot.hears(["Help", "help", "HELP"], async ctx => {
     return ctx.reply(HELP_MESSAGE, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
         .then(res => myDelete(ctx, res))
+        
 
 })
 
@@ -110,6 +112,7 @@ ${COMMAND_BREAKDOWN}
     if (groupWhitelist.includes(ctx.chat.id)) {
         return ctx.reply(WELCOME_MESSAGE, { parse_mode: 'markdown' })
             .then(res => myDelete(ctx, res))
+            
 
     }
 })
@@ -186,6 +189,7 @@ fetch(apiurl)
             }
             return ctx.reply(strCoinList, { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' })
                 .then(res => myDelete(ctx, res))
+                
 
         })
 
@@ -212,6 +216,7 @@ async function getPriceCommandOutput(ctx) {
     } else { // if only types '/price'
         return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", { reply_to_message_id: ctx.message.message_id })
             .then(res => myDelete(ctx, res))
+            
 
     }
 
@@ -229,11 +234,13 @@ async function getPriceCommandOutput(ctx) {
             }
             return ctx.reply(temp_str, { reply_to_message_id: ctx.message.message_id })
                 .then(res => myDelete(ctx, res))
+                
 
             //branch 2: types price command and coin but coin is not valid, and first letter does not match.
         } else {
             return ctx.reply("⚠️ Please type a valid coin name after the /price command. Type /list or /start to see the supported coins on Kardiachain\nE.g. /price beco", { reply_to_message_id: ctx.message.message_id })
                 .then(res => myDelete(ctx, res))
+                
 
         }
     }
@@ -259,6 +266,7 @@ async function showIFO(ctx) {
 
         })
         .then(res => myDelete(ctx, res))
+        
 
 }
 
@@ -295,6 +303,8 @@ async function mainMenu(ctx) {
             }
         })
         .then(res => myDelete(ctx, res))
+        
+
 }
 
 async function showTopTenPrices(ctx) {
@@ -353,6 +363,7 @@ async function showTopTenPrices(ctx) {
                     }
                 })
                 .then(res => myDelete(ctx, res))
+                
 
 
         })
@@ -446,6 +457,7 @@ async function onLpCommand() {
                         }
                     })
                     .then(res => myDelete(ctx, res))
+                    
 
             })
         }) //end of last then
@@ -486,6 +498,7 @@ async function displayKeyboard(ctx, keyboardData, message) {
             }
         })
         .then(res => myDelete(ctx, res))
+        
 
 
 }
@@ -553,6 +566,7 @@ async function output(name, ctx) {
                 if (usdVals.length < 24) {
                     ctx.reply(`Not enough historical data to construct a chart for *${name}*. Coin hasn't been live for 24 hours yet.\n\n${replyMessage}`, { reply_to_message_id: ctx.message.message_id, parse_mode: "markdown" })
                         .then(res => myDelete(ctx, res))
+                        
 
                     return
                 }
@@ -599,6 +613,7 @@ async function output(name, ctx) {
                         }
                     })
                     .then(res => myDelete(ctx, res))
+                    
 
             }
             if (!chatLink && website) {
@@ -616,6 +631,7 @@ async function output(name, ctx) {
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
                     })
                     .then(res => myDelete(ctx, res))
+                    
 
             }
             if (chatLink && !website) {
@@ -633,6 +649,7 @@ async function output(name, ctx) {
                         }
                     })
                     .then(res => myDelete(ctx, res))
+                    
 
             }
             if (!chatLink && !website) {
@@ -650,6 +667,7 @@ async function output(name, ctx) {
                         }
                     })
                     .then(res => myDelete(ctx, res))
+                    
 
             }
 
@@ -815,8 +833,13 @@ function myDelete(ctx, res) {
     const userMsgId = ctx.update.message.message_id
     const botMsgId = res.message_id
 
-    setTimeout(() => ctx.deleteMessage(userMsgId), DELETE_DELAY)
-    setTimeout(() => ctx.deleteMessage(botMsgId), DELETE_DELAY)
+    delay(DELETE_DELAY).then(() => ctx.deleteMessage(userMsgId)).catch(console.log)
+    delay(DELETE_DELAY).then(() => ctx.deleteMessage(botMsgId)).catch(console.log)
+
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 // //-----------------------------------------------------------------------------------above
