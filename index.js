@@ -214,10 +214,10 @@ async function getAddress(ctx) {
     if (input.length > 1) {
         const name = input[1];
 
-        if(name.toUpperCase() == 'INFO') { ctx.reply('0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F'); return;}
+        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`'); return;}
 
         const address = addresses.get(name.toUpperCase());
-        ctx.reply(`${address}`);
+        ctx.reply(`\`${address}\``);
     } else {
         ctx.reply("Invalid input")
     }
