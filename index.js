@@ -212,10 +212,10 @@ async function getAddress(ctx) {
     if (input.length > 1) {
         const name = input[1];
 
-        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`'); return;}
+        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {parse_mode: 'markdown'}); return;}
 
         const address = addresses.get(name.toUpperCase());
-        ctx.reply(`\`${address}\``);
+        ctx.reply(`\`${address}\``, {parse_mode: 'markdown'});
     } else {
         ctx.reply("Invalid input")
     }
