@@ -143,8 +143,6 @@ fetch(apiurl)
             return item.symbol
         }) // uses same reference as tokenData
 
-        console.log(addresses)
-
         //replace LTD
         let index = coinlist.indexOf("LTD Token");
         if (index !== -1) {
