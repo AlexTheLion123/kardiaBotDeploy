@@ -179,7 +179,7 @@ fetch(apiurl)
             return output("k-usdt", ctx)
         })
 
-        bot.command("address", getAddress)
+        bot.command(["address","a"], getAddress);
 
         bot.command(["price", "p"], getPriceCommandOutput)
 
