@@ -210,7 +210,8 @@ async function getAddress(ctx) {
         if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
 
         const address = addresses.get(name.toUpperCase());
-        ctx.reply(`\`${address}\``, {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'});
+        
+        address ? ctx.reply(`\`${address}\``, {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}) : ctx.reply("Enter a valid coin name after the command", {reply_to_message_id: ctx.message.message_id});
     } else {
         ctx.reply("Invalid input")
     }
