@@ -207,15 +207,15 @@ fetch(apiurl)
 async function getAddress(ctx) {
     const input = ctx.message.text.split(" ");
 
-    if (input.length == 1) { ctx.reply("Enter a coin name after the command"); return }
+    if (input.length == 1) { ctx.reply("Enter a coin name after the command", {reply_to_message_id: ctx.message.message_id}); return }
 
     if (input.length > 1) {
         const name = input[1];
 
-        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {parse_mode: 'markdown'}); return;}
+        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
 
         const address = addresses.get(name.toUpperCase());
-        ctx.reply(`\`${address}\``, {parse_mode: 'markdown'});
+        ctx.reply(`\`${address}\``, {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'});
     } else {
         ctx.reply("Invalid input")
     }
