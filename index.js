@@ -55,9 +55,7 @@ const COMMAND_BREAKDOWN = `Here is the breakdown of commands that I support:
 /addres, /a - show address for the specified token. E.g. /a info
 `
 
-const HELP_MESSAGE = airdropMessage +
-`
-${COMMAND_BREAKDOWN}
+const HELP_MESSAGE = airdropMessage + `${COMMAND_BREAKDOWN}
 To show the chart for a token, just find the token in the menu or send a message with the token name as a single word. Try it, type in 'kai'
 `
 
