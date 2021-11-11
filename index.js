@@ -1,6 +1,4 @@
 // require('dotenv').config();
-// const airdropMessage = "Kardia info Airdrop ongoing, you will receive 1 [Airdrop token](https://explorer.kardiachain.io/token/0x10329b5Ed3F44a3242E5d796AD4Efd072cFf9D4a) which you can swap for a real INFO after it’s launch - kardiainfo.com/airdrop\n\n"
-// const airdropMessage = "INFO ICO is ongoing at kardiainfo.com/ico make sure to not miss out on the Chainlink of KAI!\n\n"
 const airdropMessage = "Multiply your KAI with 1 click - kardiainfo.com/game" + "\n\n"
 
 const Telegraf = require('telegraf');
@@ -58,8 +56,7 @@ Here is the breakdown of commands that I support:
 /addres, /a - show address for the specified token. E.g. /a info
 `
 
-const HELP_MESSAGE = airdropMessage +
-    `
+const HELP_MESSAGE = airdropMessage +`
 ${COMMAND_BREAKDOWN}
 To show the chart for a token, just find the token in the menu or send a message with the token name as a single word. Try it, type in 'kai'
 `
