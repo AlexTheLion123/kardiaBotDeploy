@@ -45,8 +45,7 @@ let coinKeyboard = []; // array of objects for keyboard of coins
 let topTenSymbols = [];
 let addresses = new Map();
 
-const COMMAND_BREAKDOWN = `
-Here is the breakdown of commands that I support:
+const COMMAND_BREAKDOWN = `Here is the breakdown of commands that I support:
 /price symbol - get the price of the specified token. E.g. /price beco
 /list, /info - get a list of the top ten KRC tokens by tvl
 /help - a breakdown of all the bot commands
