@@ -52,7 +52,7 @@ const COMMAND_BREAKDOWN = `Here is the breakdown of commands that I support:
 /menu - show the main menu
 /now, /summary - show the price summary for the top ten KRC tokens
 /lps - show the available LP pairs on kaidex
-/addres, /a - show address for the specified token. E.g. /a info
+/address, /a - show address for the specified token. E.g. /a info
 `
 
 const HELP_MESSAGE = airdropMessage + `${COMMAND_BREAKDOWN}
