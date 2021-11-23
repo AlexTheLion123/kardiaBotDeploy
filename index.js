@@ -208,6 +208,7 @@ async function getAddress(ctx) {
         const name = input[1];
 
         if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
+        if(name.toUpperCase() == 'DKAI') { ctx.reply('\`0xef8F1Cb4E28EBe9649a3A1B1473274B00C068184\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
 
         const address = addresses.get(name.toUpperCase());
         
