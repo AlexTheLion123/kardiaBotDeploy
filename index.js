@@ -1,5 +1,5 @@
 // require('dotenv').config();
-const airdropMessage = "Multiply your KAI with 1 click - kardiainfo.com/game" + "\n\n"
+const airdropMessage = "Farm INFO on kardiainfo.com/farm" + "\n\n"
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
