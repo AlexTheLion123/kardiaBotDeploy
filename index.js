@@ -583,7 +583,7 @@ async function output(name, ctx) {
         .then(async res => {
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
             if (chatLink && website) {
-                return await ctx.replyWithPhoto(res,
+                return await ctx.replyWithPhoto("photo does not exist",
                     {
                         reply_to_message_id: ctx.message.message_id,
                         caption: replyMessage,
