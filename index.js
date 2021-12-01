@@ -1,5 +1,5 @@
 // require('dotenv').config();
-const airdropMessage = "Farm INFO on kardiainfo.com/farm" + "\n\n"
+const airdropMessage = ""
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
