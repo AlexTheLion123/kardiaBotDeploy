@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 
 const airdropMessage = ""
 
@@ -508,10 +508,6 @@ async function output(name, ctx) {
     if (name == "LTD") {
         name = "LTD Token"
     }
-    if (name == "KEPHI" || name == "kephi" || name == "Kephi") {
-        name = "KPHI"
-    }
-    if (name == "KUSDT" || name == "kusdt" || name == "Kusdt") name = "KUSD-T"
 
     await fetch(apiurl)
         .then((res) => {
@@ -891,11 +887,11 @@ function getchart2(chartdata, coinname) {
 }
 // //-----------------------------------------------------------------------------------above
 
-bot.launch({
-    webhook: {
-        domain: HEROKU_URL,
-        port: PORT
-    }
-})
+// bot.launch({
+//     webhook: {
+//         domain: HEROKU_URL,
+//         port: PORT
+//     }
+// })
 
-// bot.launch()
+bot.launch()
