@@ -11,7 +11,6 @@ const fs = require('fs');
 
 const axios = require(`axios`);
 const fetch = require('node-fetch');
-var wget = require('node-wget');
 
 
 const apiurl = process.env.TOKEN_API;
@@ -598,20 +597,20 @@ async function output(name, ctx) {
 
 
 async function downloadAndSendChart(ctx, url, image_path) {
-    axios({
+    await axios({
         url,
         responseType: 'stream',
-    }).then(
-        response =>
-            new Promise((resolve, reject) => {
+    })
+        .then(response => {
+            return new Promise((resolve, reject) => {
                 response.data
                     .pipe(fs.createWriteStream(image_path))
-                    .on('finish', () => resolve())
+                    .on('finish', resolve)
                     .on('error', e => reject(e));
             })
-    )
-        .then(sendChart(ctx, image_path))
-        .catch(
+        })
+        .then(() => sendChart(ctx, image_path))
+        .catch(error =>
             ctx.reply("Chart not available right now\n\n" + replyMessage,
                 {
                     reply_to_message_id: ctx.message.message_id,
@@ -627,7 +626,25 @@ async function downloadAndSendChart(ctx, url, image_path) {
             )
         )
 
+    deleteImage(image_path)
+            
+}
 
+function deleteImage(path) {
+    try {
+        fs.unlinkSync(path, (err) => {
+            if (err) {
+              console.error(err)
+              
+            }
+          
+            //file removed
+          })
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
 }
 
 /// @param res - image
