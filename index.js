@@ -130,7 +130,7 @@ fetch(apiurl)
         tokenData = jsonData.tokens;
         topTenArray = tokenData.slice(0, 10);
         topTenSymbols = topTenArray.map(item => item.symbol);
-        
+
 
         coinlist = jsonData.tokens.map(item => {
             addresses.set(item.symbol, item.contract);
@@ -174,7 +174,7 @@ fetch(apiurl)
             return output("k-usdt", ctx)
         })
 
-        bot.command(["address","a"], getAddress);
+        bot.command(["address", "a"], getAddress);
 
         bot.command(["price", "p"], getPriceCommandOutput)
 
@@ -202,17 +202,17 @@ fetch(apiurl)
 async function getAddress(ctx) {
     const input = ctx.message.text.split(" ");
 
-    if (input.length == 1) { ctx.reply("Enter a coin name after the command", {reply_to_message_id: ctx.message.message_id}); return }
+    if (input.length == 1) { ctx.reply("Enter a coin name after the command", { reply_to_message_id: ctx.message.message_id }); return }
 
     if (input.length > 1) {
         const name = input[1];
 
-        if(name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
-        if(name.toUpperCase() == 'DKAI') { ctx.reply('\`0xef8F1Cb4E28EBe9649a3A1B1473274B00C068184\`', {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}); return;}
+        if (name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
+        if (name.toUpperCase() == 'DKAI') { ctx.reply('\`0xef8F1Cb4E28EBe9649a3A1B1473274B00C068184\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
 
         const address = addresses.get(name.toUpperCase());
-        
-        address ? ctx.reply(`\`${address}\``, {reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown'}) : ctx.reply("Enter a valid coin name after the command", {reply_to_message_id: ctx.message.message_id});
+
+        address ? ctx.reply(`\`${address}\``, { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }) : ctx.reply("Enter a valid coin name after the command", { reply_to_message_id: ctx.message.message_id });
     } else {
         ctx.reply("Invalid input")
     }
@@ -596,6 +596,22 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .catch(
+                        ctx.reply(
+                            {
+                                reply_to_message_id: ctx.message.message_id,
+                                caption: replyMessage,
+                                parse_mode: "markdown",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                        ]
+                                    ]
+                                }
+                            }
+                        )
+                    )
             }
             if (!chatLink && website) {
                 return await ctx.replyWithPhoto(res,
@@ -611,6 +627,22 @@ async function output(name, ctx) {
                             ]
                         } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
                     })
+                    .catch(
+                        ctx.reply(
+                            {
+                                reply_to_message_id: ctx.message.message_id,
+                                caption: replyMessage,
+                                parse_mode: "markdown",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                        ]
+                                    ]
+                                }
+                            }
+                        )
+                    )
             }
             if (chatLink && !website) {
                 return await ctx.replyWithPhoto(res,
@@ -626,6 +658,22 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .catch(
+                        ctx.reply(
+                            {
+                                reply_to_message_id: ctx.message.message_id,
+                                caption: replyMessage,
+                                parse_mode: "markdown",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                        ]
+                                    ]
+                                }
+                            }
+                        )
+                    )
             }
             if (!chatLink && !website) {
                 return await ctx.replyWithPhoto(res,
@@ -641,6 +689,22 @@ async function output(name, ctx) {
                             ]
                         }
                     })
+                    .catch(
+                        ctx.reply(
+                            {
+                                reply_to_message_id: ctx.message.message_id,
+                                caption: replyMessage,
+                                parse_mode: "markdown",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                        ]
+                                    ]
+                                }
+                            }
+                        )
+                    )
             }
 
         })//end of fetch .then
