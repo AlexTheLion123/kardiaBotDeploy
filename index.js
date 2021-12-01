@@ -597,7 +597,7 @@ async function output(name, ctx) {
                         }
                     })
                     .catch(
-                        ctx.reply(
+                        ctx.reply("",
                             {
                                 reply_to_message_id: ctx.message.message_id,
                                 caption: replyMessage,
