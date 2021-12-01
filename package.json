@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1",
+    "node-wget": "^0.4.3",
     "quickchart-js": "^1.4.0",
     "telegraf": "3.33"
   }

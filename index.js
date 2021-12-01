@@ -1,4 +1,5 @@
 //require('dotenv').config();
+
 const airdropMessage = ""
 
 const Telegraf = require('telegraf');
@@ -6,9 +7,12 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const PORT = process.env.PORT || 3000;
 const HEROKU_URL = process.env.HEROKU_URL;
+const fs = require('fs');
 
 const axios = require(`axios`);
 const fetch = require('node-fetch');
+var wget = require('node-wget');
+
 
 const apiurl = process.env.TOKEN_API;
 const apiLPurl = process.env.LP_API;
@@ -583,87 +587,132 @@ async function output(name, ctx) {
         .then(async res => {
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
 
-            try {
 
-                if (chatLink && website) {
-                    return await ctx.replyWithPhoto(res,
-                        {
-                            reply_to_message_id: ctx.message.message_id,
-                            caption: replyMessage,
-                            parse_mode: "markdown",
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [
-                                        { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                    ]
-                                ]
-                            }
-                        })
-                }
-                if (!chatLink && website) {
-                    return await ctx.replyWithPhoto(res,
-                        {
-                            reply_to_message_id: ctx.message.message_id,
-                            caption: replyMessage,
-                            parse_mode: "markdown",
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [
-                                        { text: `Website`, url: website }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                    ]
-                                ]
-                            } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
-                        })
-                }
-                if (chatLink && !website) {
-                    return await ctx.replyWithPhoto(res,
-                        {
-                            reply_to_message_id: ctx.message.message_id,
-                            caption: replyMessage,
-                            parse_mode: "markdown",
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [
-                                        { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                    ]
-                                ]
-                            }
-                        })
-                }
-                if (!chatLink && !website) {
-                    return await ctx.replyWithPhoto(res,
-                        {
-                            reply_to_message_id: ctx.message.message_id,
-                            caption: replyMessage,
-                            parse_mode: "markdown",
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [
-                                        { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                    ]
-                                ]
-                            }
-                        })
-                }
-            } catch (e) {
-                ctx.reply("Chart not available right now\n\n" + replyMessage,
-                    {
-                        reply_to_message_id: ctx.message.message_id,
-                        parse_mode: "markdown",
-                        reply_markup: {
-                            inline_keyboard: [
-                                [
-                                    { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                ]
-                            ]
-                        }
-                    }
-                )
+            downloadAndSendChart(ctx, res, 'chart.png')
 
-            }
+
 
         })//end of fetch .then
 }
+
+
+
+function downloadAndSendChart(ctx, url, image_path) {
+    axios({
+        url,
+        responseType: 'stream',
+    }).then(
+        response =>
+            new Promise((resolve, reject) => {
+                response.data
+                    .pipe(fs.createWriteStream(image_path))
+                    .on('finish', () => resolve())
+                    .on('error', e => reject(e));
+            })
+    )
+        .then(sendChart(ctx, image_path))
+        .catch(
+            await ctx.reply("Chart not available right now\n\n" + replyMessage,
+                {
+                    reply_to_message_id: ctx.message.message_id,
+                    parse_mode: "markdown",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                            ]
+                        ]
+                    }
+                }
+            )
+        )
+
+
+}
+
+/// @param res - image
+async function sendChart(ctx, res) {
+    try {
+
+        if (chatLink && website) {
+            return ctx.replyWithPhoto({ source: res },
+                {
+                    reply_to_message_id: ctx.message.message_id,
+                    caption: replyMessage,
+                    parse_mode: "markdown",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                            ]
+                        ]
+                    }
+                })
+        }
+        if (!chatLink && website) {
+            return ctx.replyWithPhoto({ source: res },
+                {
+                    reply_to_message_id: ctx.message.message_id,
+                    caption: replyMessage,
+                    parse_mode: "markdown",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: `Website`, url: website }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                            ]
+                        ]
+                    } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
+                })
+        }
+        if (chatLink && !website) {
+            return ctx.replyWithPhoto({ source: res },
+                {
+                    reply_to_message_id: ctx.message.message_id,
+                    caption: replyMessage,
+                    parse_mode: "markdown",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                            ]
+                        ]
+                    }
+                })
+        }
+        if (!chatLink && !website) {
+            return ctx.replyWithPhoto({ source: res },
+                {
+                    reply_to_message_id: ctx.message.message_id,
+                    caption: replyMessage,
+                    parse_mode: "markdown",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                            ]
+                        ]
+                    }
+                })
+        }
+    } catch (e) {
+        // await ctx.reply("Chart not available right now\n\n" + replyMessage,
+        //     {
+        //         reply_to_message_id: ctx.message.message_id,
+        //         parse_mode: "markdown",
+        //         reply_markup: {
+        //             inline_keyboard: [
+        //                 [
+        //                     { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+        //                 ]
+        //             ]
+        //         }
+        //     }
+        // )
+        console.log(e)
+
+    }
+}
+
 
 function checkRateLimited(ctx) {
     if (whitelist.includes(ctx.from.id)) {
