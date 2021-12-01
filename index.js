@@ -1,4 +1,4 @@
-// require('dotenv').config();
+//require('dotenv').config();
 const airdropMessage = ""
 
 const Telegraf = require('telegraf');
@@ -646,10 +646,9 @@ async function output(name, ctx) {
                         })
                 }
             } catch (e) {
-                ctx.reply("",
+                ctx.reply("Chart not available right now\n\n" + replyMessage,
                     {
                         reply_to_message_id: ctx.message.message_id,
-                        caption: replyMessage,
                         parse_mode: "markdown",
                         reply_markup: {
                             inline_keyboard: [
