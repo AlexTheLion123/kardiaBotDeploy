@@ -169,12 +169,16 @@ fetch(apiurl)
             return output(transformInput(ctx.message.text), ctx);
         })
 
-        bot.hears(["kephi, Kephi"], async ctx => {
+        bot.hears(["kephi", "Kephi"], async ctx => {
             return output("KPHI", ctx)
         })
 
-        bot.hears(["kusdt, Kusdt"], async ctx => {
+        bot.hears(["kusdt", "Kusdt"], async ctx => {
             return output("k-usdt", ctx)
+        })
+
+        bot.hears(["ltd","Ltd"], async ctx => {
+            return output("LTD", ctx)
         })
 
         bot.command(["address", "a"], getAddress);
