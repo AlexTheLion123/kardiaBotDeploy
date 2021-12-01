@@ -582,8 +582,71 @@ async function output(name, ctx) {
         })
         .then(async res => {
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
-            if (chatLink && website) {
-                return await ctx.replyWithPhoto("photo does not exist",
+
+            try {
+
+                if (chatLink && website) {
+                    return await ctx.replyWithPhoto(res,
+                        {
+                            reply_to_message_id: ctx.message.message_id,
+                            caption: replyMessage,
+                            parse_mode: "markdown",
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                    ]
+                                ]
+                            }
+                        })
+                }
+                if (!chatLink && website) {
+                    return await ctx.replyWithPhoto(res,
+                        {
+                            reply_to_message_id: ctx.message.message_id,
+                            caption: replyMessage,
+                            parse_mode: "markdown",
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: `Website`, url: website }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                    ]
+                                ]
+                            } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
+                        })
+                }
+                if (chatLink && !website) {
+                    return await ctx.replyWithPhoto(res,
+                        {
+                            reply_to_message_id: ctx.message.message_id,
+                            caption: replyMessage,
+                            parse_mode: "markdown",
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                    ]
+                                ]
+                            }
+                        })
+                }
+                if (!chatLink && !website) {
+                    return await ctx.replyWithPhoto(res,
+                        {
+                            reply_to_message_id: ctx.message.message_id,
+                            caption: replyMessage,
+                            parse_mode: "markdown",
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
+                                    ]
+                                ]
+                            }
+                        })
+                }
+            } catch (e) {
+                ctx.reply("",
                     {
                         reply_to_message_id: ctx.message.message_id,
                         caption: replyMessage,
@@ -595,116 +658,9 @@ async function output(name, ctx) {
                                 ]
                             ]
                         }
-                    })
-                    .catch(
-                        ctx.reply("",
-                            {
-                                reply_to_message_id: ctx.message.message_id,
-                                caption: replyMessage,
-                                parse_mode: "markdown",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                        ]
-                                    ]
-                                }
-                            }
-                        )
-                    )
-            }
-            if (!chatLink && website) {
-                return await ctx.replyWithPhoto(res,
-                    {
-                        reply_to_message_id: ctx.message.message_id,
-                        caption: replyMessage,
-                        parse_mode: "markdown",
-                        reply_markup: {
-                            inline_keyboard: [
-                                [
-                                    { text: `Website`, url: website }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                ]
-                            ]
-                        } // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')
-                    })
-                    .catch(
-                        ctx.reply("",
-                            {
-                                reply_to_message_id: ctx.message.message_id,
-                                caption: replyMessage,
-                                parse_mode: "markdown",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                        ]
-                                    ]
-                                }
-                            }
-                        )
-                    )
-            }
-            if (chatLink && !website) {
-                return await ctx.replyWithPhoto(res,
-                    {
-                        reply_to_message_id: ctx.message.message_id,
-                        caption: replyMessage,
-                        parse_mode: "markdown",
-                        reply_markup: {
-                            inline_keyboard: [
-                                [
-                                    { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                ]
-                            ]
-                        }
-                    })
-                    .catch(
-                        ctx.reply("",
-                            {
-                                reply_to_message_id: ctx.message.message_id,
-                                caption: replyMessage,
-                                parse_mode: "markdown",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                        ]
-                                    ]
-                                }
-                            }
-                        )
-                    )
-            }
-            if (!chatLink && !website) {
-                return await ctx.replyWithPhoto(res,
-                    {
-                        reply_to_message_id: ctx.message.message_id,
-                        caption: replyMessage,
-                        parse_mode: "markdown",
-                        reply_markup: {
-                            inline_keyboard: [
-                                [
-                                    { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                ]
-                            ]
-                        }
-                    })
-                    .catch(
-                        ctx.reply("",
-                            {
-                                reply_to_message_id: ctx.message.message_id,
-                                caption: replyMessage,
-                                parse_mode: "markdown",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: `Website`, url: website }, { text: 'Chat', url: chatLink }, { text: 'Explorer', url: `explorer.kardiachain.io/token/${contract}` }
-                                        ]
-                                    ]
-                                }
-                            }
-                        )
-                    )
+                    }
+                )
+
             }
 
         })//end of fetch .then
