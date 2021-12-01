@@ -588,7 +588,7 @@ async function output(name, ctx) {
             // kardiainfo.com/tokens/${name.replace(/\s+/g, '_')} old website button link
 
 
-            downloadAndSendChart(ctx, res, 'chart.png')
+            await downloadAndSendChart(ctx, res, 'chart.png')
 
 
 
@@ -597,7 +597,7 @@ async function output(name, ctx) {
 
 
 
-function downloadAndSendChart(ctx, url, image_path) {
+async function downloadAndSendChart(ctx, url, image_path) {
     axios({
         url,
         responseType: 'stream',
@@ -612,7 +612,7 @@ function downloadAndSendChart(ctx, url, image_path) {
     )
         .then(sendChart(ctx, image_path))
         .catch(
-            await ctx.reply("Chart not available right now\n\n" + replyMessage,
+            ctx.reply("Chart not available right now\n\n" + replyMessage,
                 {
                     reply_to_message_id: ctx.message.message_id,
                     parse_mode: "markdown",
