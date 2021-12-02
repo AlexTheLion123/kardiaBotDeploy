@@ -216,6 +216,8 @@ async function getAddress(ctx) {
 
         if (name.toUpperCase() == 'INFO') { ctx.reply('\`0x5FFD7a138422cBbcfB53908AD51F656D7C6c640F\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
         if (name.toUpperCase() == 'DKAI') { ctx.reply('\`0xef8F1Cb4E28EBe9649a3A1B1473274B00C068184\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
+        if (name.toUpperCase() == 'CINFO') { ctx.reply('\`0x2a0Ae9C38E3f5178372Ce30615C2575D534ea13e\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
+        if (name.toUpperCase() == 'FINFO') { ctx.reply('\`0x54E5A1772Fc6C011abDcf176E47b02F4F001AE9F\`', { reply_to_message_id: ctx.message.message_id, parse_mode: 'markdown' }); return; }
 
         const address = addresses.get(name.toUpperCase());
 
