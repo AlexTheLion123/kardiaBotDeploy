@@ -1,6 +1,6 @@
 // require('dotenv').config();
 
-const airdropMessage = ""
+const airdropMessage = "*Multiply your KAI by up to x4750:*\n\n👉 kardiainfo.com/game\n\n"
 
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
